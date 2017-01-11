@@ -1,5 +1,10 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+.navbar-default {
+    background-color: #0f0f0f;
+    margin-bottom: 0;
+}
+.navbar-default .navbar-nav>.active>a {
+    background-color: #A9A9A9;
+}
+footer {
+    bottom:0;
 }
