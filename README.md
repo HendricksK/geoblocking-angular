@@ -4,5 +4,16 @@
 #IMDB cheat sheet
 https://www.themoviedb.org/documentation/api/discover
 
-#start slim local php server
+
+
+#SLIM UPDATES
+
+start slim local php server
 cd [my-app-name]; php -S 0.0.0.0:8080 -t public public/index.php
+
+commenting out dependencies, routes and middleware from slim - added cross origin for localhost:3000 so I can interact with angular app
+
+Things I want to add:
+1. commenting section that interacts with MYSQL - using slim framework
+2. display music that is connected to the specific film/series
+3. add a radio api/soundcloud to allow users to search for music directly from site
