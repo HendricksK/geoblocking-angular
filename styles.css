@@ -8,3 +8,28 @@
 footer {
     bottom:0;
 }
+img {
+    width: 100%;
+}
+h1 {
+    word-wrap: break-word;
+}
+
+.jumbotron .container img {
+    margin-top: 35px;
+}
+.movie-listing {
+    padding: 0.65rem;
+    max-height: 100%;
+}
+.movie-list .movie-poster {
+    max-height: 60%;
+    width: 100%;
+}
+.search-results {
+    height: 400px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
+}

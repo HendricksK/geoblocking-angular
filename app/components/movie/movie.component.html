@@ -1,0 +1,22 @@
+<section>
+    <div *ngIf="movie">
+        <div class="panel panel-defaut movie-list">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{movie.title}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img *ngIf="movie.poster_path" class="thumbnail movie-poster" src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+                        <img *ngIf="!movie.poster_path" class="thumbnail movie-poster" src="http://static.comicvine.com/uploads/original/11124/111240907/5036157-rocky_balboa.jpg">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-group">
+                            <li class="list-group-item">Genres: <span *ngFor="let genre of movie.genres">{{genre.name}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

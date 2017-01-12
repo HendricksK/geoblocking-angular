@@ -1,42 +1,82 @@
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/23/8a/2e/238a2ebe0b1983a035223c3f5d87ab5e.jpg" alt="">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+<section id="banner">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <img src="http://static.comicvine.com/uploads/original/11124/111240907/5036157-rocky_balboa.jpg">
+                    </div>
+                    <h1>ADDDRRRRRIIIIIIIAAAAANNNNNNNNN - Help me find a movie</h1>
+                    <form (submit)="searchMovies()">
+                        <input type="text" class="form-control" [(ngModel)]="searchStr" name="searchStr">
+                        <br>
+                        <button class="btn btn-default">Search Movies</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/23/8a/2e/238a2ebe0b1983a035223c3f5d87ab5e.jpg" alt="">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+</section>
+<section>
+    <div *ngIf="searchRes" class="panel panel-defaut search-results">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Results</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div *ngFor="let movie of searchRes; let i=index" class="col-md-12">
+                    <div *ngIf="i < 18">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img *ngIf="movie.poster_path" class="thumbnail movie-poster" src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+                                <img *ngIf="!movie.poster_path" class="thumbnail movie-poster" src="http://static.comicvine.com/uploads/original/11124/111240907/5036157-rocky_balboa.jpg">
+                            </div>
+                            <div class="col-md-10">
+                                <h4>{{movie.title}}</h4>
+                                <p>{{movie.release_date}}</p>
+                                <a class="btn btn-default" routerLink="/movie/{{movie.id}}">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/23/8a/2e/238a2ebe0b1983a035223c3f5d87ab5e.jpg" alt="">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+</section>
+<section>
+    <div class="panel panel-defaut movie-list">
+        <div class="panel-heading">
+            <h3 class="panel-title">Popular Movies</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div *ngFor="let movie of popularList; let i=index" class="col-md-3 movie-listing">
+                    <div *ngIf="i < 6">
+                        <img *ngIf="movie.poster_path" class="thumbnail movie-poster" src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+                        <h4>{{movie.title}}</h4>
+                        <p>{{movie.release_date}}</p>
+                        <a class="btn btn-default" routerLink="/movie/{{movie.id}}">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/23/8a/2e/238a2ebe0b1983a035223c3f5d87ab5e.jpg" alt="">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+
+    <div class="panel panel-defaut movie-list">
+        <div class="panel-heading">
+            <h3 class="panel-title">In Theaters</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div *ngFor="let theater of theatersList; let i=index" class="col-md-2 movie-listing">
+                    <div *ngIf="i < 6">
+                        <img *ngIf="theater.poster_path" class="thumbnail movie-poster" src="http://image.tmdb.org/t/p/w500/{{theater.poster_path}}">
+                        <h4>{{theater.title}}</h4>
+                        <p>{{theater.release_date}}</p>
+                        <a class="btn btn-default" routerLink="/movie/{{theater.id}}">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</section>
