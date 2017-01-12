@@ -18,6 +18,18 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $api = new \Slim\App($settings);
 
+$api->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+
+$api->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // Set up dependencies
 //require __DIR__ . '/../src/dependencies.php';
 
@@ -38,8 +50,8 @@ $api->get('/conversations', function($request, $response) {
     //     return $response;
     // }
     // $response = $response->getBody()->write('No user has been found with the sepcified ID');
-    $response = $response->getBody()->write('data needs to go here' . json_encode($result));
-    return $response;
+    //$response = $response->getBody()->write('data needs to go here' . json_encode($result));
+    return json_encode($result);
 });
 
 // Run app

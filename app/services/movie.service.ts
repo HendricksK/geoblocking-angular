@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Jsonp } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/Rx';
 
 @Injectable()
 export class MovieService {
     apikey:string;
 
-    constructor(private _jsonp:Jsonp) {
+    constructor(private _jsonp:Jsonp, private _http:Http) {
         this.apikey = '787cc29e9b66bfa13c6904942d74beb4';
         console.log('Movieservice is initialized...');
     }
@@ -31,5 +32,9 @@ export class MovieService {
     getMovie(id: string) {
         return this._jsonp.get('http://api.themoviedb.org/3/movie/'+id+'?api_key='+this.apikey+'&callback=JSONP_CALLBACK')
             .map(res => res.json());
+    }
+
+    getConversations() {
+        return this._http.get('http://0.0.0.0:8080/conversations');
     }
 }

@@ -13,6 +13,7 @@ export class MoviesComponent {
     theatersList: Array<Object>;
     searchStr: string;
     searchRes: Array<Object>;
+    conversations: Object;
 
     constructor(private _movieService: MovieService) {
         this._movieService.getPopular().subscribe(res => {
@@ -22,11 +23,21 @@ export class MoviesComponent {
         this._movieService.getInTheaters().subscribe(res => {
             this.theatersList = res.results;
         });
+
+        this._movieService.getConversations().subscribe(res => {
+            console.log(res);
+        });
     }
 
     searchMovies() {
         this._movieService.searchMovies(this.searchStr).subscribe(res => {
             this.searchRes = res.results;
         })
+    }
+
+    getConversations() {
+        this._movieService.getConversations().subscribe(res => {
+            console.log(res);
+        });
     }
 }
