@@ -18,6 +18,11 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $api = new \Slim\App($settings);
 
+
+/*
+adding this cross origin access to allow angular to
+connect and interact with slim framework
+*/
 $api->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
@@ -55,8 +60,8 @@ $api->get('/conversation/{id}', function($request, $response) {
     return json_encode($result);
 });
 
-$api->post('/conversation/new/', function($request, $response) {
-    $conversation_obj = $request->getAttribute('conversation');
+$api->post('/conversation/new/{conversation_data}', function($request, $response) {
+    $conversation_obj = $request->getAttribute('conversation_data');
     $converse = new conversation();
     $result = $converse->saveConversation($conversation_obj);
 
