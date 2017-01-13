@@ -30,7 +30,7 @@ $api->options('/{routes:.+}', function ($request, $response, $args) {
 $api->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:3000','*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
@@ -61,10 +61,12 @@ $api->get('/conversation/{id}', function($request, $response) {
 });
 
 $api->post('/conversation/new/', function($request, $response) {
+
     $data = file_get_contents('php://input');
     $conversation = new conversation();
     $data = json_decode($data);
     $conversation_data = array_shift($data);
+    var_dump($conversation_data->movie_id);
     $conversation->saveConversation($conversation_data);
 });
 

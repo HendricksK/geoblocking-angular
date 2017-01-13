@@ -29,7 +29,6 @@ export class ConversationService {
 
         console.log(JSON.stringify(this.conversate));
 
-
         return this._http.post('http://0.0.0.0:8080/conversation/new/', JSON.stringify(this.conversate));
     }
 }

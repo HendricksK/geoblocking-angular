@@ -58,10 +58,10 @@ class conversation extends dbConnetion
             $stmt = $this->db->prepare($sql);
             return $stmt->execute(
                 array(
-                    ':movie_id' => $conversation['movie_id'],
-                    ':create_date' => $conversation['create_date'],
-                    ':edited' => $conversation['edited'],
-                    ':conversation' => $conversation['conversation']
+                    ':movie_id' => $conversation->movie_id,
+                    ':create_date' => $conversation->create_date,
+                    ':edited' => $conversation->edited,
+                    ':conversation' => $conversation->conversation
                 ));
         }
         return 0;
