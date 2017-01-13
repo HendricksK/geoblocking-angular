@@ -11,7 +11,7 @@ export class ConversationsComponent {
     conversations: Object;
 
     constructor(private _conversationService: ConversationService) {
-        console.log(this._conversationService.sendConversations().subscribe( res => {
+        this._conversationService.sendConversations().subscribe( res => {
                 console.log(res);
         });
     }

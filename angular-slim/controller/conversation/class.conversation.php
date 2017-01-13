@@ -47,12 +47,22 @@ class conversation extends dbConnetion
 
     public function saveConversation($conversation)
     {
-        if(!empty($id))
+        /*movie_id: '748593',
+        create_date: '2016-06-07',
+        edited: '2016-08-06',
+        conversation:*/
+        if(!empty($conversation))
         {
-            $sql = "SELECT * FROM conversation WHERE id = :id";
+            $sql = "INSERT INTO conversation (movie_id, create_date, edited, conversation)
+            VALUES (:movie_id, :create_date, :edited, :conversation)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute(array(':id' => $id));
-            return $stmt->fetchAll();
+            return $stmt->execute(
+                array(
+                    ':movie_id' => $conversation['movie_id'],
+                    ':create_date' => $conversation['create_date'],
+                    ':edited' => $conversation['edited'],
+                    ':conversation' => $conversation['conversation']
+                ));
         }
         return 0;
     }

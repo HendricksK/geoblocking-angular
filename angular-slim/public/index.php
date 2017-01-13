@@ -30,7 +30,7 @@ $api->options('/{routes:.+}', function ($request, $response, $args) {
 $api->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
-            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
@@ -60,12 +60,12 @@ $api->get('/conversation/{id}', function($request, $response) {
     return json_encode($result);
 });
 
-$api->post('/conversation/new/{conversation_data}', function($request, $response) {
-    $conversation_obj = $request->getAttribute('conversation_data');
-    $converse = new conversation();
-    $result = $converse->saveConversation($conversation_obj);
-
-    return json_encode('things are well in the world');
+$api->post('/conversation/new/', function($request, $response) {
+    $data = file_get_contents('php://input');
+    $conversation = new conversation();
+    $data = json_decode($data);
+    $conversation_data = array_shift($data);
+    $conversation->saveConversation($conversation_data);
 });
 
 // Run app
