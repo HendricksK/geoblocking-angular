@@ -10,7 +10,9 @@ export class ConversationsComponent {
 
     conversations: Object;
 
-    constructor(private _conversationService: ConversationService) {}
+    constructor(private _conversationService: ConversationService) {
+        console.log(this._conversationService.sendConversations());
+    }
 
     getConversations() {
         this._conversationService.getConversations().subscribe(res => {

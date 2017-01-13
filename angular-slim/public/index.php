@@ -65,7 +65,7 @@ $api->post('/conversation/new/{conversation_data}', function($request, $response
     $converse = new conversation();
     $result = $converse->saveConversation($conversation_obj);
 
-    return json_encode($result);
+    return json_encode('things are well in the world');
 });
 
 // Run app
