@@ -9,10 +9,17 @@ import { MoviesComponent }  from './components/movies/movies.component';
 import { MovieComponent }  from './components/movie/movie.component';
 import { MoviesSearchComponent }  from './components/movies/movies-search.component';
 import { ConversationsComponent }  from './components/conversations/conversations.component';
+import { ChatComponent }  from './components/chat/chat.component';
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule, JsonpModule, FormsModule, routing ],
-  declarations: [ AppComponent, MoviesComponent, MovieComponent, MoviesSearchComponent, ConversationsComponent ],
+  declarations: [ AppComponent,
+                  MoviesComponent,
+                  MovieComponent,
+                  MoviesSearchComponent,
+                  ConversationsComponent,
+                  ChatComponent
+                ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
