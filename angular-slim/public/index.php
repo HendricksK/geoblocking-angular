@@ -41,16 +41,25 @@ $api->add(function ($req, $res, $next) {
 
 //select all
 $api->get('/conversations', function($request, $response) {
-    $id = $request->getAttribute('id');
     $converse = new conversation();
     $result = $converse->getConversations();
 
-    // if(!empty($result)){
-    //     $response = $response->getBody()->write('Welcome to the slim framework test endpoint: ' . $result['name'] );
-    //     return $response;
-    // }
-    // $response = $response->getBody()->write('No user has been found with the sepcified ID');
-    //$response = $response->getBody()->write('data needs to go here' . json_encode($result));
+    return json_encode($result);
+});
+
+$api->get('/conversation/{id}', function($request, $response) {
+    $id = $request->getAttribute('id');
+    $converse = new conversation();
+    $result = $converse->getConversation($id);
+
+    return json_encode($result);
+});
+
+$api->post('/conversation/new/', function($request, $response) {
+    $conversation_obj = $request->getAttribute('conversation');
+    $converse = new conversation();
+    $result = $converse->saveConversation($conversation_obj);
+
     return json_encode($result);
 });
 

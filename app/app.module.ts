@@ -7,10 +7,11 @@ import { routing } from './app.routing';
 import { AppComponent }  from './app.component';
 import { MoviesComponent }  from './components/movies/movies.component';
 import { MovieComponent }  from './components/movie/movie.component';
+import { MoviesSearchComponent }  from './components/movies/movies-search.component';
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule, JsonpModule, FormsModule, routing ],
-  declarations: [ AppComponent, MoviesComponent, MovieComponent ],
+  declarations: [ AppComponent, MoviesComponent, MovieComponent, MoviesSearchComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

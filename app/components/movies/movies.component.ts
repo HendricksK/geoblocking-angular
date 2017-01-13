@@ -5,7 +5,6 @@ import { MovieService } from '../../services/movie.service';
     moduleId: module.id,
     selector: 'movies',
     templateUrl: 'movies.component.html',
-
 })
 export class MoviesComponent {
 
