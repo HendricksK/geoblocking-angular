@@ -63,9 +63,9 @@ $api->get('/conversation/{id}', function($request, $response) {
 $api->post('/conversation/new/', function($request, $response) {
 
     $data = file_get_contents('php://input');
-    $conversation = new conversation();
     $data = json_decode($data);
     $conversation_data = array_shift($data);
+    $conversation = new conversation();
     $result = $conversation->saveConversation($conversation_data);
     return json_encode($result);
 });
@@ -73,9 +73,9 @@ $api->post('/conversation/new/', function($request, $response) {
 $api->put('/conversation/update/', function($request, $response) {
 
     $data = file_get_contents('php://input');
-    $conversation = new conversation();
     $data = json_decode($data);
     $conversation_data = array_shift($data);
+    $conversation = new conversation();
     $result = $conversation->updateConversation($conversation_data);
     return json_encode($result);
 });
