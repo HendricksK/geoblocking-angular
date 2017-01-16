@@ -29,9 +29,11 @@ class conversation extends dbConnetion
     {
         if(!empty($id))
         {
-            $sql = "SELECT * FROM conversation WHERE id = :id";
+            $sql = "SELECT conversation FROM conversation where movie_id = :id";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute(array(':id' => $id));
+            $stmt->execute(array(
+                ':id' => $id
+            ));
             return $stmt->fetchAll();
         }
         return 0;
@@ -66,6 +68,19 @@ class conversation extends dbConnetion
                     ':movie_id' => $conversation->movie_id,
                     ':edited' => $conversation->edited,
                     ':conversation' => $conversation->conversation
+                ));
+        }
+        return 0;
+    }
+
+    public function deleteConversation($id)
+    {
+        if(!empty($conversation))
+        {
+            $sql = "DELETE FROM conversation WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute(    array(
+                    ':id' => $id
                 ));
         }
         return 0;

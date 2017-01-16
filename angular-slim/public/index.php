@@ -46,16 +46,16 @@ $api->add(function ($req, $res, $next) {
 
 //select all
 $api->get('/conversations', function($request, $response) {
-    $converse = new conversation();
-    $result = $converse->getConversations();
+    $conversation = new conversation();
+    $result = $conversation->getConversations();
 
     return json_encode($result);
 });
 
 $api->get('/conversation/{id}', function($request, $response) {
     $id = $request->getAttribute('id');
-    $converse = new conversation();
-    $result = $converse->getConversation($id);
+    $conversation = new conversation();
+    $result = $conversation->getConversation($id);
 
     return json_encode($result);
 });
@@ -77,6 +77,14 @@ $api->put('/conversation/update/', function($request, $response) {
     $conversation_data = array_shift($data);
     $conversation = new conversation();
     $result = $conversation->updateConversation($conversation_data);
+    return json_encode($result);
+});
+
+$api->delete('/conversation/delete/{id}', function($request, $response) {
+
+    $id = $request->getAttribute('id');
+    $conversation = new conversation();
+    $result = $conversation->deleteConversation($id);
     return json_encode($result);
 });
 

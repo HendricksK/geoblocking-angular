@@ -5,46 +5,46 @@ import 'rxjs/Rx';
 @Injectable()
 export class ConversationService {
     conversate: Object;
-    check: Object;
+    date: Date;
 
-    constructor( private _http:Http) {}
+    constructor( private _http:Http) {
+    }
 
     getConversations() {
         return this._http.get('http://0.0.0.0:8080/conversations');
     }
 
     getConversation(movie_id:string) {
-        return this._http.get('http://0.0.0.0:8080/conversation'+movie_id);
+        return this._http.get('http://0.0.0.0:8080/conversation/'+movie_id);
     }
 
-    public sendConversations(movie_id:string, conversation_data:any) {
+    sendConversations(movie_id:string, conversation_data:any) {
+        let res = this._http.get('http://0.0.0.0:8080/conversation/'+movie_id).subscribe(res => {});
 
-        this.check = this._http.get('http://0.0.0.0:8080/conversation' + movie_id);
-
-        window.console.log('conversations' + this.check);
-
-        if(this.check === undefined){
+        this.date = new Date();
+        console.log(res);
+        if(this.check == undefined) {
+            console.log('imaundefined');
             this.conversate = [{
                 movie_id: movie_id,
-                create_date: '2016-06-07',
-                edited: '2016-08-06',
+                create_date: this.date,
+                edited: this.date,
                 conversation: JSON.stringify(conversation_data)
             }];
-
-            window.console.log(JSON.stringify(this.conversate));
 
             return this._http.post('http://0.0.0.0:8080/conversation/new/', JSON.stringify(this.conversate));
         }
 
         this.conversate = [{
             movie_id: movie_id,
-            create_date: '2016-06-07',
-            edited: '2016-08-06',
+            edited: this.date,
             conversation: JSON.stringify(conversation_data)
         }];
 
-        window.console.log(JSON.stringify(this.conversate));
-
         return this._http.put('http://0.0.0.0:8080/conversation/update/', JSON.stringify(this.conversate));
+    }
+
+    deleteConversation(id:string) {
+        return this._http.delete('http://0.0.0.0:8080/conversation'+id);
     }
 }

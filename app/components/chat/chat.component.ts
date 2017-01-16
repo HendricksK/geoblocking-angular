@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ConversationService } from '../../services/conversation.service';
+import { MovieService } from '../../services/movie.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     moduleId: module.id,
     selector: 'chat',
     templateUrl: 'chat.component.html',
-    providers: [ ChatService, ConversationService ]
+    providers: [ ChatService, ConversationService, MovieService ]
 })
 export class ChatComponent implements OnInit, OnDestroy {
     messages: any = [];
@@ -14,21 +16,25 @@ export class ChatComponent implements OnInit, OnDestroy {
     connection: any;
     username: string;
     alert: any = false;
+    movie_id: string;
 
-    constructor(private _chatService:ChatService, private _conversationService:ConversationService) {
+    constructor(private _chatService:ChatService, private _conversationService:ConversationService, private router:ActivatedRoute) {
 
     }
 
     sendMessage() {
         this._chatService.sendMessage(this.message, this.username);
-        this.sendChat('4567', this.messages);
+        this.messages.push(this.message);
+        this.sendChat(this.movie_id, this.messages);
         this.message = '';
-        this.username = '';
     }
 
     ngOnInit() {
         this.connection = this._chatService.getMessages().subscribe(message => {
             this.messages.push(message);
+        });
+        this.router.params.subscribe((params) => {
+            this.movie_id = params['id'];
         });
     }
 

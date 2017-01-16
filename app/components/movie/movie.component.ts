@@ -12,7 +12,7 @@ import { ChatComponent }  from '../chat/chat.component';
 })
 export class MovieComponent implements OnInit {
     movie: Object;
-
+    movie_id: string;
     constructor(
         private router:ActivatedRoute,
         private _movieService:MovieService) {
@@ -21,11 +21,15 @@ export class MovieComponent implements OnInit {
 
     ngOnInit() {
         this.router.params.subscribe((params) => {
-            let id = params['id'];
-            this._movieService.getMovie(id).subscribe(movie => {
+            this.movie_id = params['id'];
+            this._movieService.getMovie(this.movie_id).subscribe(movie => {
                 this.movie = movie;
             })
         })
+    }
+
+    getMovieId() {
+        return this.movie_id;
     }
 
 }

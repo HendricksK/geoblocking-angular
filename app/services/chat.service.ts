@@ -35,7 +35,7 @@ export class ChatService {
     }
 
     setUsername(username:string) {
-        console.log('Username set: ' + username);
+        window.console.log('Username set: ' + username);
         sessionStorage.setItem('username', username);
     }
 }
