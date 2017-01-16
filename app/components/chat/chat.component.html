@@ -1,5 +1,18 @@
-<input type="text" placeholder="Enter a message" [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()">
-<br>
-<div *ngFor="let message of messages">
-    {{message.text}}
+<div>
+    <label>Username: </label>
+    <input type="text" [(ngModel)]="username" name="username">
+    <br>
+    <button (click)="setUsername()">Submit</button>
+</div>
+
+<div *ngIf="username">
+    <input type="text" placeholder="Enter message..." [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()">
+    <br>
+    <div *ngFor="let message of messages">
+        <strong>{{message.username}}: </strong> {{message.text}}
+    </div>
+</div>
+
+<div *ngIf="!username">
+    Please log in to chat
 </div>
