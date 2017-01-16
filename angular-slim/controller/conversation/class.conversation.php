@@ -14,14 +14,6 @@ class conversation extends dbConnetion
 
     public function getConversations()
     {
-        // if(!empty($id))
-        // {
-        //     $sql = "SELECT * FROM conversation WHERE id = :id";
-        //     $stmt = $this->db->prepare($sql);
-        //     $stmt->execute(array(':id' => $id));
-        //     return $stmt->fetchAll();
-        // }
-        // return 0;
         $sql = "SELECT * FROM conversation";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -47,10 +39,6 @@ class conversation extends dbConnetion
 
     public function saveConversation($conversation)
     {
-        /*movie_id: '748593',
-        create_date: '2016-06-07',
-        edited: '2016-08-06',
-        conversation:*/
         if(!empty($conversation))
         {
             $sql = "INSERT INTO conversation (movie_id, create_date, edited, conversation)
@@ -63,6 +51,18 @@ class conversation extends dbConnetion
                     ':edited' => $conversation->edited,
                     ':conversation' => $conversation->conversation
                 ));
+        }
+        return 0;
+    }
+
+    public function updateConversation($conversation)
+    {
+        if(!empty($conversation))
+        {
+            $sql = "UPDATE conversation SET (edited = $conversation->edited, conversation = $conversation->conversation)
+            WHERE movie_id = $conversation->movie_id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute();
         }
         return 0;
     }

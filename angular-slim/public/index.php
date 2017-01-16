@@ -66,8 +66,18 @@ $api->post('/conversation/new/', function($request, $response) {
     $conversation = new conversation();
     $data = json_decode($data);
     $conversation_data = array_shift($data);
-    var_dump($conversation_data->movie_id);
-    $conversation->saveConversation($conversation_data);
+    $result = $conversation->saveConversation($conversation_data);
+    return json_encode($result);
+});
+
+$api->put('/conversation/update/', function($request, $response) {
+
+    $data = file_get_contents('php://input');
+    $conversation = new conversation();
+    $data = json_decode($data);
+    $conversation_data = array_shift($data);
+    $result = $conversation->updateConversation($conversation_data);
+    return json_encode($result);
 });
 
 // Run app
