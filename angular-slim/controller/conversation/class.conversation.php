@@ -59,10 +59,14 @@ class conversation extends dbConnetion
     {
         if(!empty($conversation))
         {
-            $sql = "UPDATE conversation SET (edited = $conversation->edited, conversation = $conversation->conversation)
-            WHERE movie_id = $conversation->movie_id";
+            $sql = "UPDATE conversation SET edited = :edited, conversation = :conversation
+            WHERE movie_id = :movie_id";
             $stmt = $this->db->prepare($sql);
-            return $stmt->execute();
+            return $stmt->execute(    array(
+                    ':movie_id' => $conversation->movie_id,
+                    ':edited' => $conversation->edited,
+                    ':conversation' => $conversation->conversation
+                ));
         }
         return 0;
     }
